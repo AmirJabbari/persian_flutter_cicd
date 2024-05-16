@@ -2,8 +2,7 @@ name: "Build & Release"
 
 on:
   push:
-    tags:
-      - '*'
+    branches: [master]
 
 jobs:
   development:
@@ -32,6 +31,11 @@ jobs:
       - name: Build Development
         run: flutter build apk
 
+      - name: Upload APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: App-Releases
+          path: ./build/outputs/apk/flutter-apk/app-release.apk
 
       - name: Build Web
         run: flutter build web
